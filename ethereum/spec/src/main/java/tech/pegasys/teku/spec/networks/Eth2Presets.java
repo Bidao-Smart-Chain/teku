@@ -19,6 +19,7 @@ public enum Eth2Presets {
   MAINNET,
   MINIMAL,
   SWIFT,
+  BIDAO,
   GNOSIS;
 
   public String presetName() {

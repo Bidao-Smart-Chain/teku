@@ -17,6 +17,7 @@ import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 import static java.util.Arrays.asList;
 import static tech.pegasys.teku.spec.constants.NetworkConstants.DEFAULT_SAFE_SLOTS_TO_IMPORT_OPTIMISTICALLY;
+import static tech.pegasys.teku.spec.networks.Eth2Network.BIDAO;
 import static tech.pegasys.teku.spec.networks.Eth2Network.GNOSIS;
 import static tech.pegasys.teku.spec.networks.Eth2Network.KILN;
 import static tech.pegasys.teku.spec.networks.Eth2Network.LESS_SWIFT;
@@ -480,6 +481,8 @@ public class Eth2NetworkConfiguration {
           return applyKilnNetworkDefaults();
         case GNOSIS:
           return applyGnosisNetworkDefaults();
+        case BIDAO:
+          return applyBidaoNetworkDefaults();
         case SWIFT:
           return applySwiftNetworkDefaults();
         case LESS_SWIFT:
@@ -652,6 +655,18 @@ public class Eth2NetworkConfiguration {
               "enr:-Ly4QBbaKRSX4SncCOxTTL611Kxlz-zYFrIn-k_63jGIPK_wbvFghVUHJICPCxufgTX5h79jvgfPr-2hEEQEdziGQ5MCh2F0dG5ldHOIAAAAAAAAAACEZXRoMpCCS-QxAgAAZP__________gmlkgnY0gmlwhAMazo6Jc2VjcDI1NmsxoQKt-kbM9isuWp8djhyEq6-4MLv1Sy7dOXeMOMdPgwu9LohzeW5jbmV0cwCDdGNwgiMog3VkcIIjKA",
               "enr:-Ly4QKJ5BzgFyJ6BaTlGY0C8ROzl508U3GA6qxdG5Gn2hxdke6nQO187pYlLvhp82Dez4PQn436Fts1F0WAm-_5l2LACh2F0dG5ldHOIAAAAAAAAAACEZXRoMpCCS-QxAgAAZP__________gmlkgnY0gmlwhA-YLVKJc2VjcDI1NmsxoQI8_Lvr6p_TkcAu8KorKacfUEnoOon0tdO0qWhriPdBP4hzeW5jbmV0cwCDdGNwgiMog3VkcIIjKA",
               "enr:-Ly4QJMtoiX2bPnVbiQOJCLbtUlqdqZk7kCJQln_W1bp1vOHcxWowE-iMXkKC4_uOb0o73wAW71WYi80Dlsg-7a5wiICh2F0dG5ldHOIAAAAAAAAAACEZXRoMpCCS-QxAgAAZP__________gmlkgnY0gmlwhDbP3KmJc2VjcDI1NmsxoQNvcfKYUqcemLFlpKxl7JcQJwQ3L9unYL44gY2aEiRnI4hzeW5jbmV0cwCDdGNwgiMog3VkcIIjKA");
+    }
+    
+    public Builder applyBidaoNetworkDefaults() {
+      return reset()
+          .constants(BIDAO.configName())
+          .startupTimeoutSeconds(120)
+          .eth1DepositContractDeployBlock(0)
+          .initialStateFromClasspath("bidao-genesis.ssz")
+          .genesisStateFromClasspath("bidao-genesis.ssz")
+          .discoveryBootnodes(
+          "enr:-KG4QBX5OyA24C6U7Uipt5jC-jqCIb19I2gT_XXPkJ4KkdIdShJtUY8xKffJtGRbWMmeDs2_PoZUvFqpCFl9QD5Vf9tUhGV0aDKQS4Rj_ZAAAHL__________4JpZIJ2NIJpcIQtVIohiXNlY3AyNTZrMaECcvkkzKYrl8x51GUfk9zzBdQ1OAnPs_RyY_BPRuF_dg2DdGNwgiMog3VkcIIjKA"
+          );
     }
   }
 }
